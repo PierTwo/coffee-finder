@@ -16,5 +16,13 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
-  }
+}
+
+.sm-border-radius {
+    border-radius: 5px;
+}
+
+
+.h1-sm-uppercase {
+    font-variant: small-caps;
+}
