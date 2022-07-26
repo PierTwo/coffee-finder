@@ -7,14 +7,21 @@ button {
     margin-bottom: 10px;
 }
 h1 {
+    font-size: 50px;
+    color: rgb(62, 61, 61);
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 15%;
 }
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    justify-content: center;
     width: 30%;
   }
+.btn-flat {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}
+  
