@@ -1,2 +1,3 @@
-# coffee-finder
-Find coffee shops for your route!
+# Unburied Museum Cataloger
+
+Search through collections from different museums
