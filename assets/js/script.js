@@ -49,16 +49,25 @@ var getMuseumOne = function (q) {
 };
 
 function chicagoArt(q) {
-    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${q}&limit=50&fields=id,title,image_id,artist_title,thumbnail`)
+    $("#artResults").siblings().remove();
+
+    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${q}&limit=5&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin,date_qualifier_title`)
         .then(function (response) {
             console.log(response);
             return response.json();
         })
         .then(function (data) {
             console.log(data);
-            $("#art").attr("src", `https://www.artic.edu/iiif/2/${data.data[0].image_id}/full/843,/0/default.jpg`);
+            chicagoArtResults(data.data);
         });
 
+    function chicagoArtResults(results) {
+        console.log(results.length)
+        for (let i = 0; i < results.length; i++) {
+            var imgHTML = `<img src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg"/>`
+            $("#artResults").after(imgHTML);
+        };
+    };
 };
 
 
