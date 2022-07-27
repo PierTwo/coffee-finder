@@ -21,7 +21,7 @@ var getMuseumOne = function () {
             fetch(artUrl).then(function (response) {
               if (response.ok) {
                 response.json().then(function (data) {
-                  console.log("data", data);
+                  //console.log("data", data);
                   if (data.primaryImage !== "") {
                     artObjects.push({
                       title: data.title,
@@ -31,6 +31,12 @@ var getMuseumOne = function () {
                       objectDate: data.objectDate,
                       artistDisplayName: data.artistDisplayName,
                     });
+                    console.log(artObjects.primaryImage);
+                  }
+                  for (let i = 1; i < artObjects.length; i++) {
+                    var artImages = artObjects[i].primaryImage;
+                    $("#art").attr("src", artImages);
+                    $("#art").show();
                   }
                 });
               } else {
