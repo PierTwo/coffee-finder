@@ -1,8 +1,7 @@
 // Met museum API. Makes a url based on search input and recieves data. Look in console.
-const input = document.getElementById("search_museum");
-const q = input.value;
+const input = $("#search_museum")
 
-var getMuseumOne = function () {
+var getMuseumOne = function (q) {
     let selectedValue = "1";
     var objectUrl =
         "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=" +
@@ -49,15 +48,15 @@ var getMuseumOne = function () {
     });
 };
 
-function chicagoArt() {
-    fetch("https://api.artic.edu/api/v1/artworks/search?q=dogs&limit=5&fields=id,title,image_id,artist_title,thumbnail")
+function chicagoArt(q) {
+    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${q}&limit=50&fields=id,title,image_id,artist_title,thumbnail`)
         .then(function (response) {
             console.log(response);
             return response.json();
         })
         .then(function (data) {
             console.log(data);
-            $("#art").attr("src", `https://www.artic.edu/iiif/2/${data.data[2].image_id}/full/843,/0/default.jpg`);
+            $("#art").attr("src", `https://www.artic.edu/iiif/2/${data.data[0].image_id}/full/843,/0/default.jpg`);
         });
 
 };
@@ -72,12 +71,14 @@ $("select").on("change", function handleChange(event) {
 
     $("#search-items").on("click", function (event) {
         event.preventDefault();
+        let q = input.val();
+
         if (selectedValue === "1") {
             console.log("Met")
-            getMuseumOne();
+            getMuseumOne(q);
         } else if (selectedValue === "2") {
             console.log("Chicago");
-            chicagoArt();
+            chicagoArt(q);
         };
     });
 });
