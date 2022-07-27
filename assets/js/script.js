@@ -35,8 +35,24 @@ var getMuseumOne = function () {
                   }
                   for (let i = 1; i < artObjects.length; i++) {
                     var artImages = artObjects[i].primaryImage;
-                    $("#art").attr("src", artImages);
-                    $("#art").show();
+                    // $("#art").attr("src", artImages);
+                    // $("#art").show();
+                    //init carousel
+                    var slider = $(".carousel");
+                    slider.carousel();
+
+                    //add a new item
+                    slider.append(
+                      '<a class="carousel-item active" href="#three!"><img src="http://lorempixel.com/250/250/nature/3"></a>'
+                    );
+
+                    //remove the 'initialized' class which prevents slider from initializing itself again when it's not needed
+                    if (slider.hasClass("initialized")) {
+                      slider.removeClass("initialized");
+                    }
+
+                    //just reinit the carousel
+                    slider.carousel();
                   }
                 });
               } else {
