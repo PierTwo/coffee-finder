@@ -15,13 +15,20 @@ h1 {
     width: 15%;
 }
 .center {
-    display: flex;
-    justify-content: center;
-    width: 30%;
-  }
-.btn-flat {
-    display: flex;
-    justify-content: center;
-    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-  
+
+.sm-border-radius {
+    border-radius: 5px;
+}
+
+
+.h1-sm-uppercase {
+    font-variant: small-caps;
+}
+
+.waves-light{
+    margin: 20px;
+}
