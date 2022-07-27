@@ -50,7 +50,7 @@ var getMuseumOne = function () {
 };
 
 function chicagoArt() {
-    fetch("https://api.artic.edu/api/v1/artworks/search?q=dogs&limit=5&fields=id,title,image_id")
+    fetch("https://api.artic.edu/api/v1/artworks/search?q=dogs&limit=5&fields=id,title,image_id,artist_title,thumbnail")
         .then(function (response) {
             console.log(response);
             return response.json();
