@@ -1,5 +1,6 @@
+var slider = $(".carousel");
 $(document).ready(function () {
-  $(".carousel").carousel();
+  slider.carousel();
 });
 
 // Met museum API. Makes a url based on search input and recieves data. Look in console.
@@ -18,7 +19,6 @@ var getMuseumOne = function (q) {
           // console.log("data", data);
           const objectIds = data.objectIDs || [];
           if (objectIds.length) {
-            const artObjects = [];
             for (var i = 0; i < objectIds.length; i++) {
               var artUrl =
                 "https://collectionapi.metmuseum.org/public/collection/v1/objects/" +
@@ -27,10 +27,9 @@ var getMuseumOne = function (q) {
                 .then(function (response) {
                   if (response.ok) {
                     response.json().then(function (data) {
-                      // console.log("data: ", data);
                       if (data.primaryImage !== "") {
-                        var slider = $(".carousel");
-                        slider.carousel();
+                        // var slider = $(".carousel");
+                        // slider.carousel();
                         // console.log("image ", data.primaryImage);
                         const slide =
                           '<a class="image carousel-item active" href="#three!"><img src=' +
@@ -89,8 +88,8 @@ function chicagoArt(q) {
       );
       */
       if (results[i].image_id !== "") {
-        var slider = $(".carousel");
-        slider.carousel();
+        // var slider = $(".carousel");
+        // slider.carousel();
         // console.log("image ", data.primaryImage);
         const slide =
           '<a class="image carousel-item active" href="#three!"><img src=https://www.artic.edu/iiif/2/' +
@@ -123,6 +122,7 @@ $("select").on("change", function handleChange(event) {
 
   $("#search-items").on("click", function (event) {
     event.preventDefault();
+    $(".carousel").empty();
     let q = input.val();
 
     if (selectedValue === "1") {
