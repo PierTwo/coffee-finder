@@ -1,25 +1,25 @@
-var slider = $(".carousel");
 $(document).ready(function () {
-  slider.carousel();
+  $(".carousel").carousel();
 });
 
 // Met museum API. Makes a url based on search input and recieves data. Look in console.
 const input = $("#search_museum");
+var count = 0;
 
 var getMuseumOne = function (q) {
   let selectedValue = "1";
   var objectUrl =
     "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=" +
     encodeURIComponent(q);
-  //console.log(artUrl);
+  console.log(objectUrl);
   fetch(objectUrl)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          // console.log("data", data);
+          // console.log("data:::", data);
           const objectIds = data.objectIDs || [];
           if (objectIds.length) {
-            for (var i = 0; i < objectIds.length; i++) {
+            for (var i = 0; i < 10; i++) {
               var artUrl =
                 "https://collectionapi.metmuseum.org/public/collection/v1/objects/" +
                 objectIds[i];
@@ -28,21 +28,14 @@ var getMuseumOne = function (q) {
                   if (response.ok) {
                     response.json().then(function (data) {
                       if (data.primaryImage !== "") {
+                        console.log("data:::", data);
                         // var slider = $(".carousel");
                         // slider.carousel();
-                        // console.log("image ", data.primaryImage);
-                        const slide =
-                          '<a class="image carousel-item active" href="#three!"><img src=' +
-                          data.primaryImage +
-                          "></a>";
-                        // console.log("slide: ", slide);
-                        slider.append(slide);
-
-                        if (slider.hasClass("initialized")) {
-                          slider.removeClass("initialized");
-                        }
-
-                        slider.carousel();
+                        var img = $(`#c${count}`).attr(
+                          "src",
+                          data.primaryImage
+                        );
+                        count++;
                       }
                     });
                   } else {
@@ -81,35 +74,16 @@ function chicagoArt(q) {
   function chicagoArtResults(results) {
     console.log(results.length);
     for (let i = 0; i < results.length; i++) {
-      /*
       var img = $(`#c${i}`).attr(
         "src",
         `https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg`
       );
-      */
-      if (results[i].image_id !== "") {
-        // var slider = $(".carousel");
-        // slider.carousel();
-        // console.log("image ", data.primaryImage);
-        const slide =
-          '<a class="image carousel-item active" href="#three!"><img src=https://www.artic.edu/iiif/2/' +
-          results[i].image_id +
-          "/full/843,/0/default.jpg /></a>";
-        // console.log("slide: ", slide);
-        slider.append(slide);
-
-        if (slider.hasClass("initialized")) {
-          slider.removeClass("initialized");
-        }
-
-        slider.carousel();
-      }
-      // console.log(img);
-      // carouselArray = ["#one!", "#two!", "#three!", "#four!", "#five!"]
-      // var imgHTML = `<a class="carousel-item" href="${carouselArray[i]}"><img src=""></a>`
-      // console.log(imgHTML);
-      // $(".carousel").append(imgHTML);
     }
+    // console.log(img);
+    // carouselArray = ["#one!", "#two!", "#three!", "#four!", "#five!"]
+    // var imgHTML = `<a class="carousel-item" href="${carouselArray[i]}"><img src=""></a>`
+    // console.log(imgHTML);
+    // $(".carousel").append(imgHTML);
   }
 }
 
@@ -122,11 +96,10 @@ $("select").on("change", function handleChange(event) {
 
   $("#search-items").on("click", function (event) {
     event.preventDefault();
-    $(".carousel").empty();
     let q = input.val();
 
     if (selectedValue === "1") {
-      // console.log("Met");
+      console.log("Met");
       getMuseumOne(q);
     } else if (selectedValue === "2") {
       console.log("Chicago");
