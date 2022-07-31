@@ -2,7 +2,7 @@ var slider = $(".carousel");
 const searchInput = $("#search_museum");
 
 // Met museum API. Makes a url based on search input and recieves data.
-
+// Makes two fetches beacuse the first fetch returns an array of object ids. The second fetch returns the artwork data. Takes the image and puts it in the carousel.
 var getMuseumOne = function () {
   var objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${searchInput.val()}`;
   fetch(objectUrl)
@@ -35,6 +35,7 @@ var getMuseumOne = function () {
   }
 };
 
+// Function for the Chicago Art Institute. Return an image and puts it in the carousel.
 function chicagoArt() {
   fetch(
     `https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=10&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin,date_qualifier_title`
@@ -45,6 +46,7 @@ function chicagoArt() {
     .then(function (data) {
       chicagoArtResults(data.data);
     });
+  //console.log("chicdatat", data);
 
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
@@ -59,6 +61,7 @@ function chicagoArt() {
 
 var selectedValue;
 
+// Click and change handlers for the submit button and dropdown to work. Starts the specific function for the chosen museum in dropdown and grabs the value written in the input.
 $("select").change(function handleChange(event) {
   event.preventDefault();
 
