@@ -2,10 +2,12 @@
     margin: 0 auto;
     padding: 0 auto;
 }
+
 button {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 h1 {
     font-size: 50px;
     color: rgb(62, 61, 61);
@@ -14,6 +16,7 @@ h1 {
     margin-right: auto;
     width: 15%;
 }
+
 .center {
     display: block;
     margin-left: auto;
@@ -27,4 +30,32 @@ h1 {
 
 .h1-sm-uppercase {
     font-variant: small-caps;
+}
+
+.pageContainer {
+    margin: 5px;
+}
+
+.carousel-slider {
+    height: 600px !important;
+}
+
+.carousel-item {
+    overflow: hidden;
+}
+
+.carouselImg {
+    height: 400px !important;
+    width: auto !important;
+    padding: 10px !important;
+}
+
+#nextBtn {
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+#prevBtn {
+    margin-top: 0px;
+    margin-right: 20px;
 }

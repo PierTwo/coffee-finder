@@ -1,6 +1,9 @@
 var slider = $(".carousel");
+var nextBtn = $("#next");
+var prevBtn = $("#prev");
 const searchInput = $("#search_museum");
 
+var selectedValue;
 // Met museum API. Makes a url based on search input and recieves data.
 
 var getMuseumOne = function () {
@@ -15,7 +18,7 @@ var getMuseumOne = function () {
     });
 
   function returnObjects(objectIDs) {
-    for (let i = 0; i < objectIDs.length; i++) {
+    for (let i = 0; i < 10; i++) {
       fetch(
         `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[i]}`
       )
@@ -26,13 +29,11 @@ var getMuseumOne = function () {
           if (data.primaryImage !== "") {
             var carouselItem = `<a class="image carousel-item" href="${data.objectURL}" target="_blank"><img src="${data.primaryImage}"></a>`;
             slider.append(carouselItem);
-            if (slider.children().length === 10) {
-              slider.carousel();
-            }
-          }
+            slider.carousel();
+          };
         });
-    }
-  }
+    };
+  };
 };
 
 function chicagoArt() {
@@ -43,21 +44,28 @@ function chicagoArt() {
       return response.json();
     })
     .then(function (data) {
+      // console.log(data);
       chicagoArtResults(data.data);
     });
 
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
       if (results[i].image_id !== "") {
-        var carouselItem = `<a class="image carousel-item" href="#${i}!"><img src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg"></a>`;
+        var carouselItem = `<div class="carousel-item" href="#${i}!">
+        <h4>${results[i].title}</h4>
+        <h5>${results[i].artist_title}</h5>
+        <img class="carouselImg" src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg">
+        <br>
+        <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
+        <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
+        </div>`;
         slider.append(carouselItem);
-      }
-    }
-    slider.carousel();
-  }
-}
-
-var selectedValue;
+      };
+    };
+    slider.carousel({ fullWidth: true });
+    prevNext();
+  };
+};
 
 $("select").change(function handleChange(event) {
   event.preventDefault();
@@ -67,11 +75,11 @@ $("select").change(function handleChange(event) {
   $("#search-items").removeAttr("disabled");
 });
 
-$("#search-items").on("click", function (event) {
+$("#search-items").click(function (event) {
   event.preventDefault();
   if (slider.hasClass("initialized")) {
     slider.removeClass("initialized");
-  }
+  };
   slider.empty();
   switch (selectedValue) {
     case "1":
@@ -82,3 +90,21 @@ $("#search-items").on("click", function (event) {
       break;
   }
 });
+
+function prevNext() {
+  $(document).on("click", "#nextBtn", function (event) {
+    event.preventDefault();
+    console.log("next");
+    var instance = M.Carousel.getInstance(slider);
+    instance.next();
+  });
+
+  $(document).on("click", "#prevBtn", function (event) {
+    event.preventDefault();
+    console.log("prev");
+    var instance = M.Carousel.getInstance(slider);
+    instance.prev();
+  });
+};
+
+

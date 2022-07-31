@@ -13,54 +13,43 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 </head>
 
-<body class="blue-grey lighten-4">
+<body class="blue-grey lighten-4 center">
   <header class="row light-blue lighten-5">
     <h1 class="h1-sm-uppercase col s12 center-align light-blue-text text-accent-4">
       Unburied - A Museum Cataloger
     </h1>
   </header>
 
-  <div class="row">
-    <form class="sm-border-radius col s12 m8 l4 grey darken-3">
-      <div>
-        <h3 class="blue-grey lighten-4 center">Search a Museum</h3>
-        <div class="input-field">
-          <input placeholder="type what you are searching for here" id="search_museum" type="text" class="validate" />
-          <label for="search_museum">Search below</label>
-          <div>
-            <label>Select A Museum</label>
-            <select class="browser-default">
-              <option value="" disabled selected>
-                Choose your museum
-              </option>
-              <option value="1">The Metropolitan Museum of Art</option>
-              <option value="2">The Art Institute of Chicago</option>
-            </select>
-          </div>
-          <div>
-            <button class="btn waves-effect waves-light s12 m6" type="submit" id="search-items" disabled>
-              Search
-            </button>
-          </div>
-        </div>
+  <div class="row col s12 center pageContainer">
+    <form class="sm-border-radius col s12 m4 l3 grey darken-3">
+      <h3 class="blue-grey lighten-4 center">Search a Museum</h3>
+      <div class="input-field">
+        <input placeholder="type what you are searching for here" id="search_museum" type="text" class="validate" />
+        <label for="search_museum">Search below</label>
+        <select class="browser-default">
+          <option value="" disabled selected>
+            Choose your museum
+          </option>
+          <option value="1">The Metropolitan Museum of Art</option>
+          <option value="2">The Art Institute of Chicago</option>
+        </select>
+        <button class="btn waves-effect waves-light s12 m6" type="submit" id="search-items" disabled>
+          Search
+        </button>
       </div>
     </form>
-    <div id='btnHistory' class="center col s12 m8 l8">
+    <div class="row col s12 m8 l9 container">
+      <h3>Art Pieces:</h3>
+      <div class="carousel carousel-slider col m12"></div>
+    </div>
+    <!-- <div id='btnHistory' class="center row col s12 m12 l12">
       <h3 class="center">Saved Art Searches:</h3>
       <button class="btn waves-effect waves-light s12 m6">Placeholder button</button>
       <button class="btn waves-effect waves-light s12 m6">Placeholder button</button>
       <button class="btn waves-effect waves-light s12 m6">Placeholder button</button>
-    </div>
+    </div> -->
   </div>
-
-
-
-  <section class="content">
-    <h1>Art Pieces</h1>
-    <div class="carousel"></div>
-    <br>
-  </section>
-  <footer class="page-footer blue">
+  <!-- <footer class="page-footer blue">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -77,7 +66,7 @@
         <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
