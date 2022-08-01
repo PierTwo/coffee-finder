@@ -175,6 +175,7 @@ function savedArtSearches() {
         $('input[name="search-input"]').val(event.target.innerText);
         $("#museum-select").val("1");
         clearSlider();
+        $("#search-items").removeAttr("disabled");
         metMuseum();
       }
     });
