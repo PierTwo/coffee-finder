@@ -1,11 +1,15 @@
+// Retrieves elements from HTML
 var slider = $(".carousel");
 var nextBtn = $("#next");
 var prevBtn = $("#prev");
-const searchInput = $("#search_museum");
+var searchInput = $("#search_museum");
 let saveTheImageSearch = JSON.parse(localStorage.getItem("savedImages") || "[]");
-var selectedValue;
-// Met museum API. Makes a url based on search input and recieves data.
 
+// Creates global variable to be used when assigning which museum the user chose
+var selectedValue;
+
+// Met museum API. Makes a url based on search input and recieves data.
+// Makes two fetches beacuse the first fetch returns an array of object ids. The second fetch returns the artwork data. Takes the image and puts it in the carousel.
 var metMuseum = function () {
   var objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${searchInput.val()}`;
   fetch(objectUrl)
@@ -48,6 +52,7 @@ var metMuseum = function () {
   };
 };
 
+// Function for the Chicago Art Institute. Return data of artwork and appends it to the carousel
 function chicagoArt() {
   fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=20&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin`)
     .then(function (response) {
@@ -83,6 +88,7 @@ function chicagoArt() {
   };
 };
 
+// Reinitialize the carousel and removes artwork
 function clearSlider() {
   if (slider.hasClass("initialized")) {
     slider.removeClass("initialized");
@@ -90,6 +96,7 @@ function clearSlider() {
   slider.empty();
 };
 
+// Change event handler for dropdown when selecting between museums
 $("select").change(function (event) {
   event.preventDefault();
 
@@ -98,6 +105,7 @@ $("select").change(function (event) {
   $("#search-items").removeAttr("disabled");
 });
 
+// Click event handler for searching artwork
 $("#search-items").click(function (event) {
   event.preventDefault();
   clearSlider();
@@ -114,6 +122,7 @@ $("#search-items").click(function (event) {
   savedArtSearches();
 });
 
+// Makes the prev and next buttons change carousel slide
 function prevNext() {
   $(document).on("click", "#nextBtn", function (event) {
     event.preventDefault();
