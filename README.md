@@ -4,12 +4,6 @@ Description:
 
 This is the Unburied Museum Cataloger. You can search a veriety of art from the Metropolitan Museum of Art and the Chicago Art Institute. Your search history will be saved so you can revisit your favorite art peices.
 
-## Table of Contents
-1. [Installation](#Installation)
-2. [Usage](#Usage:)
-3. [Built-With](#Built-with:)
-4. [Collaboration](#collaborators)
-
 ## Installation:
 
 The Application will be deployed through github pages.
