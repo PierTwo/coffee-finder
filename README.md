@@ -6,8 +6,8 @@ This is the Unburied Museum Cataloger. You can search a veriety of art from the 
 
 ## Table of Contents
 1. [Installation](#Installation)
-2. [Usage](#usage:)
-3. [Built With](#Built-with:)
+2. [Usage](#Usage:)
+3. [Built-With](#Built-with:)
 4. [Collaboration](#collaborators)
 
 ## Installation:
