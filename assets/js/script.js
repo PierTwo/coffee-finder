@@ -3,7 +3,9 @@ var slider = $(".carousel");
 var nextBtn = $("#next");
 var prevBtn = $("#prev");
 var searchInput = $("#search_museum");
-let saveTheImageSearch = JSON.parse(localStorage.getItem("savedImages") || "[]");
+let saveTheImageSearch = JSON.parse(
+  localStorage.getItem("savedImages") || "[]"
+);
 
 // Creates global variable to be used when assigning which museum the user chose
 var selectedValue;
@@ -11,6 +13,7 @@ var selectedValue;
 // Met museum API. Makes a url based on search input and recieves data.
 // Makes two fetches beacuse the first fetch returns an array of object ids. The second fetch returns the artwork data. Takes the image and puts it in the carousel.
 var metMuseum = function () {
+  console.log("Met", searchInput.val());
   var objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${searchInput.val()}`;
   fetch(objectUrl)
     .then(function (response) {
@@ -22,21 +25,23 @@ var metMuseum = function () {
 
   function returnObjects(objectIDs) {
     for (let i = 0; i < 20; i++) {
-      fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[i]}`)
+      fetch(
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[i]}`
+      )
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
           console.log(data);
           if (data.primaryImage) {
-            var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${data.title}</h4>`
+            var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${data.title}</h4>`;
 
             if (data.artistDisplayName) {
-              carouselItem += `<h5>${data.artistDisplayName}</h5>`
-            };
+              carouselItem += `<h5>${data.artistDisplayName}</h5>`;
+            }
             if (data.objectDate) {
-              carouselItem += `<h5>Date: ${data.objectDate}</h4>`
-            };
+              carouselItem += `<h5>Date: ${data.objectDate}</h4>`;
+            }
 
             carouselItem += `<img class="carouselImg" src="${data.primaryImage}">
               <br>
@@ -47,16 +52,19 @@ var metMuseum = function () {
 
             slider.append(carouselItem);
             slider.carousel({ fullWidth: true });
-          };
+          }
         });
-    };
+    }
     prevNext();
-  };
+  }
 };
 
 // Function for the Chicago Art Institute. Return data of artwork and appends it to the carousel
 function chicagoArt() {
-  fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=20&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin`)
+  console.log("Chicago", searchInput.val());
+  fetch(
+    `https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=20&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin`
+  )
     .then(function (response) {
       return response.json();
     })
@@ -68,14 +76,14 @@ function chicagoArt() {
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
       if (results[i].image_id) {
-        var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${results[i].title}</h4>`
+        var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${results[i].title}</h4>`;
 
         if (results[i].artist_title) {
-          carouselItem += `<h5>${results[i].artist_title}</h5>`
-        };
+          carouselItem += `<h5>${results[i].artist_title}</h5>`;
+        }
         if (results[i].date_display) {
-          carouselItem += `<h5>Date: ${results[i].date_display}</h5>`
-        };
+          carouselItem += `<h5>Date: ${results[i].date_display}</h5>`;
+        }
 
         carouselItem += `<img class="carouselImg" src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg">
           <br>
@@ -85,20 +93,20 @@ function chicagoArt() {
           </div>`;
 
         slider.append(carouselItem);
-      };
-    };
+      }
+    }
     slider.carousel({ fullWidth: true });
     prevNext();
-  };
-};
+  }
+}
 
 // Reinitialize the carousel and removes artwork
 function clearSlider() {
   if (slider.hasClass("initialized")) {
     slider.removeClass("initialized");
-  };
+  }
   slider.empty();
-};
+}
 
 // Change event handler for dropdown when selecting between museums
 $("select").change(function (event) {
@@ -121,7 +129,7 @@ $("#search-items").click(function (event) {
     case "2":
       chicagoArt();
       break;
-  };
+  }
   saveImageSearch();
   savedArtSearches();
 });
@@ -141,13 +149,13 @@ function prevNext() {
     var instance = M.Carousel.getInstance(slider);
     instance.prev();
   });
-};
+}
 
 function saveImageSearch() {
   let userInput = searchInput.val();
   saveTheImageSearch.push(userInput);
   localStorage.setItem("savedImages", JSON.stringify(saveTheImageSearch));
-};
+}
 
 function savedArtSearches() {
   $("#saved-art-searches").html("");
@@ -159,10 +167,18 @@ function savedArtSearches() {
     saveSearchBtn.on("click", function (event) {
       event.preventDefault();
       clearSlider();
+      console.log("ecent", event);
 
-      metMuseum(saveTheImageSearch[i]);
-      chicagoArt(saveTheImageSearch[i]);
+      // metMuseum();
+      // chicagoArt();
+      if (event.target.innerText !== "") {
+        $('input[name="search-input"]').val(event.target.innerText);
+        $("#museum-select").val("1");
+        clearSlider();
+        metMuseum();
+      }
     });
-  };
-};
+  }
+}
 
+savedArtSearches();
