@@ -37,12 +37,14 @@ var metMuseum = function () {
             if (data.objectDate) {
               carouselItem += `<h5>Date: ${data.objectDate}</h4>`
             };
+
             carouselItem += `<img class="carouselImg" src="${data.primaryImage}">
               <br>
               <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
               <button id="linkBtn" class="btn waves-effect waves-light"><a href="${data.objectURL}" target="_blank">View on metmuseum.org</a></button>
               <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
               </div>`;
+
             slider.append(carouselItem);
             slider.carousel({ fullWidth: true });
           };
@@ -67,19 +69,21 @@ function chicagoArt() {
     for (let i = 0; i < results.length; i++) {
       if (results[i].image_id) {
         var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${results[i].title}</h4>`
+
         if (results[i].artist_title) {
           carouselItem += `<h5>${results[i].artist_title}</h5>`
         };
-
         if (results[i].date_display) {
           carouselItem += `<h5>Date: ${results[i].date_display}</h5>`
         };
+
         carouselItem += `<img class="carouselImg" src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg">
           <br>
           <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
           <button id="linkBtn" class="btn waves-effect waves-light"><a href="https://www.artic.edu/artworks/${results[i].id}" target="_blank">View on artic.edu</a></button>
           <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
           </div>`;
+
         slider.append(carouselItem);
       };
     };
@@ -142,7 +146,6 @@ function prevNext() {
 function saveImageSearch() {
   let userInput = searchInput.val();
   saveTheImageSearch.push(userInput);
-
   localStorage.setItem("savedImages", JSON.stringify(saveTheImageSearch));
 };
 
