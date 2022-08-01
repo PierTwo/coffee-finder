@@ -2,11 +2,11 @@ var slider = $(".carousel");
 var nextBtn = $("#next");
 var prevBtn = $("#prev");
 const searchInput = $("#search_museum");
-
+let saveTheImageSearch = JSON.parse(localStorage.getItem("savedImages") || "[]");
 var selectedValue;
 // Met museum API. Makes a url based on search input and recieves data.
 
-var getMuseumOne = function () {
+var metMuseum = function () {
   var objectUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${searchInput.val()}`;
   fetch(objectUrl)
     .then(function (response) {
@@ -67,7 +67,14 @@ function chicagoArt() {
   };
 };
 
-$("select").change(function handleChange(event) {
+function clearSlider() {
+  if (slider.hasClass("initialized")) {
+    slider.removeClass("initialized");
+  };
+  slider.empty();
+};
+
+$("select").change(function (event) {
   event.preventDefault();
 
   selectedValue = event.target.value;
@@ -77,18 +84,18 @@ $("select").change(function handleChange(event) {
 
 $("#search-items").click(function (event) {
   event.preventDefault();
-  if (slider.hasClass("initialized")) {
-    slider.removeClass("initialized");
-  };
-  slider.empty();
+  clearSlider();
+
   switch (selectedValue) {
     case "1":
-      getMuseumOne();
+      metMuseum();
       break;
     case "2":
       chicagoArt();
       break;
-  }
+  };
+  saveImageSearch();
+  savedArtSearches();
 });
 
 function prevNext() {
@@ -107,4 +114,27 @@ function prevNext() {
   });
 };
 
+function saveImageSearch() {
+  let userInput = searchInput.val();
+  saveTheImageSearch.push(userInput);
+
+  localStorage.setItem("savedImages", JSON.stringify(saveTheImageSearch));
+};
+
+function savedArtSearches() {
+  $("#saved-art-searches").html("");
+
+  for (let i = 0; i < saveTheImageSearch.length; i++) {
+    var saveSearchBtn = $("<button></button>").text(saveTheImageSearch[i]);
+    saveSearchBtn.addClass("btn waves-effect waves-light s12 m6");
+    $("#saved-art-searches").append(saveSearchBtn);
+    saveSearchBtn.on("click", function (event) {
+      event.preventDefault();
+      clearSlider();
+
+      metMuseum(saveTheImageSearch[i]);
+      chicagoArt(saveTheImageSearch[i]);
+    });
+  };
+};
 
