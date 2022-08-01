@@ -14,51 +14,67 @@ var metMuseum = function () {
     })
     .then(function (data) {
       returnObjects(data.objectIDs);
-      console.log(data);
     });
 
   function returnObjects(objectIDs) {
-    for (let i = 0; i < 10; i++) {
-      fetch(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[i]}`
-      )
+    for (let i = 0; i < 20; i++) {
+      fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectIDs[i]}`)
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
-          if (data.primaryImage !== "") {
-            var carouselItem = `<a class="image carousel-item" href="${data.objectURL}" target="_blank"><img src="${data.primaryImage}"></a>`;
+          console.log(data);
+          if (data.primaryImage) {
+            var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${data.title}</h4>`
+
+            if (data.artistDisplayName) {
+              carouselItem += `<h5>${data.artistDisplayName}</h5>`
+            };
+            if (data.objectDate) {
+              carouselItem += `<h5>Date: ${data.objectDate}</h4>`
+            };
+            carouselItem += `<img class="carouselImg" src="${data.primaryImage}">
+              <br>
+              <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
+              <button id="linkBtn" class="btn waves-effect waves-light"><a href="${data.objectURL}" target="_blank">View on metmuseum.org</a></button>
+              <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
+              </div>`;
             slider.append(carouselItem);
-            slider.carousel();
+            slider.carousel({ fullWidth: true });
           };
         });
     };
+    prevNext();
   };
 };
 
 function chicagoArt() {
-  fetch(
-    `https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=10&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin,date_qualifier_title`
-  )
+  fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput.val()}&limit=20&fields=id,title,image_id,artist_title,thumbnail,date_display,place_of_origin`)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
+      console.log(data.data);
       chicagoArtResults(data.data);
     });
 
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
-      if (results[i].image_id !== "") {
-        var carouselItem = `<div class="carousel-item" href="#${i}!">
-        <h4>${results[i].title}</h4>
-        <h5>${results[i].artist_title}</h5>
-        <img class="carouselImg" src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg">
-        <br>
-        <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
-        <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
-        </div>`;
+      if (results[i].image_id) {
+        var carouselItem = `<div class="carousel-item" href="#${i}!"><h4>${results[i].title}</h4>`
+        if (results[i].artist_title) {
+          carouselItem += `<h5>${results[i].artist_title}</h5>`
+        };
+
+        if (results[i].date_display) {
+          carouselItem += `<h5>Date: ${results[i].date_display}</h5>`
+        };
+        carouselItem += `<img class="carouselImg" src="https://www.artic.edu/iiif/2/${results[i].image_id}/full/843,/0/default.jpg">
+          <br>
+          <button id="prevBtn" class="btn waves-effect waves-light">Prev</button>
+          <button id="linkBtn" class="btn waves-effect waves-light"><a href="https://www.artic.edu/artworks/${results[i].id}" target="_blank">View on artic.edu</a></button>
+          <button id="nextBtn" class="btn waves-effect waves-light">Next</button>
+          </div>`;
         slider.append(carouselItem);
       };
     };
