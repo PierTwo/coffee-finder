@@ -39,6 +39,7 @@ var metMuseum = function () {
       returnObjects(data.objectIDs);
     })
     .catch(function() {
+      // Calls Modal function
       showModal();
       closeModal();
     });
@@ -93,6 +94,7 @@ function chicagoArt() {
       chicagoArtResults(data.data);
     })
     .catch(function() {
+         // Calls Modal function
       showModal();
       closeModal();
     });
