@@ -1,0 +1,106 @@
+* {
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 50px;
+    color: rgb(62, 61, 61);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sm-border-radius {
+    border-radius: 5px;
+}
+
+
+.h1-sm-uppercase {
+    font-variant: small-caps;
+}
+
+.searchContainer {
+    margin: 5px;
+    padding-bottom: 30px;
+}
+
+.carousel-slider {
+    height: 600px !important;
+}
+
+.carousel-item {
+    overflow: hidden;
+}
+
+.carouselImg {
+    height: 400px !important;
+    width: auto !important;
+    padding: 10px !important;
+}
+
+#nextBtn,
+#prevBtn,
+#linkBtn {
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+#linkBtn a {
+    text-decoration: none;
+    color: white;
+}
+
+#historyDiv {
+    margin: 0;
+}
+
+.footerLinks {
+    text-decoration: underline;
+}
+
+/* Styling for Modal pop up */
+#modal {
+    font-size: larger;
+    display: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: gray;
+    background-color: rgba(6, 6, 6, 0.6);
+}
+
+.modal-container {
+    border: 2px solid rgb(179, 177, 177);
+    border-radius: 5px;
+    padding: 30px;
+    width: 50%;
+    margin-top: 200px;
+}
+
+#close-modal {
+    float: right;
+}
+
+#close-modal:hover {
+    cursor: pointer;
+}
