@@ -21,6 +21,9 @@ var metMuseum = function () {
     })
     .then(function (data) {
       returnObjects(data.objectIDs);
+    })
+    .catch(function() {
+      alert("invalid input, please try again");
     });
 
   function returnObjects(objectIDs) {
