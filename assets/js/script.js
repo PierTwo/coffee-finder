@@ -5,22 +5,6 @@ var prevBtn = $("#prev");
 var searchInput = $("#search_museum");
 var savedArtEl = $("#saved-art-searches");
 
-// Global variable to grab modal ID element
-var modal = document.getElementById("modal");
-
-// Function to show modal on .catch function
-function showModal() {
-  modal.style.display = "block";
-}
-
-// Function to listen for click if close button is clicked
-function closeModal() {
-  var closeModal = document.getElementById("close-modal");
-  closeModal.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
-}
-
 // Creates global variable to be used when assigning which museum the user chose
 var selectedMuseumVal;
 
@@ -47,11 +31,6 @@ var metMuseum = function (searchValue) {
     .then(function (data) {
       // Call returnObjects with the objectIDs from the API data
       returnObjects(data.objectIDs);
-    })
-    .catch(function () {
-      // Calls Modal function
-      showModal();
-      closeModal();
     });
 
   // Displays the artworks on the page
@@ -114,11 +93,6 @@ function chicagoArt(searchValue) {
     .then(function (data) {
       // Passes the data object from the data retrieved from the API to chicagoArtResults
       chicagoArtResults(data.data);
-    })
-    .catch(function () {
-      // Calls Modal function
-      showModal();
-      closeModal();
     });
 
   // Displays the results of the search
