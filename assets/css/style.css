@@ -79,7 +79,9 @@ h1 {
 }
 
 .modal-container {
-    padding: 10px;
+    border: 2px solid rgb(179, 177, 177);
+    border-radius: 5px;
+    padding: 30px;
     width: 50%;
     margin-top: 200px;
 }
