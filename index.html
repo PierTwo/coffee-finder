@@ -20,8 +20,8 @@
     </h1>
   </header>
 
-  <div class="row col s12 center pageContainer">
-    <form class="sm-border-radius col s12 m4 l3 grey darken-3">
+  <div class="row s12 center searchContainer">
+    <form class="row sm-border-radius col s12 m4 l3 grey darken-3">
       <h3 class="blue-grey lighten-3 center">Search a Museum</h3>
       <div class="input-field">
         <input placeholder="Type what you are searching for here" name="search-input" id="search_museum" type="text"
@@ -38,15 +38,15 @@
       </div>
     </form>
 
-    <div class="row col s12 m8 l9 container">
+    <div class="col right s12 m8 l9 container">
       <h3>Art Pieces:</h3>
       <div class="carousel carousel-slider col m12"></div>
     </div>
 
-    <div id="historyDiv" class="center col s12 m8 l8 hide">
+    <div id="historyDiv" class="col s12 m8 l3">
       <h3 class="center">Saved Art Searches:</h3>
       <button id="clearHistory" class="btn waves-effect waves-light s12 m6">Clear Search History</button>
-      <div id="saved-art-searches"></div>
+      <div id="saved-art-searches" class="hide"></div>
     </div>
   </div>
 

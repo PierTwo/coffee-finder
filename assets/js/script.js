@@ -10,7 +10,7 @@ var selectedMuseumVal;
 
 $(document).ready(function () {
   if (localStorage.length) {
-    $("#historyDiv").removeClass("hide");
+    savedArtEl.removeClass("hide");
   };
 
   for (let i = 0; i < localStorage.length; i++) {
@@ -30,6 +30,7 @@ var metMuseum = function (searchValue) {
       return response.json();
     })
     .then(function (data) {
+      console.log(data)
       returnObjects(data.objectIDs);
     });
 
@@ -138,7 +139,7 @@ $("#search-items").click(function (event) {
       break;
   };
 
-  $("#historyDiv").removeClass("hide");
+  savedArtEl.removeClass("hide");
   saveArtSearches();
 });
 
@@ -203,5 +204,5 @@ $("#clearHistory").click(function (event) {
   event.preventDefault();
 
   localStorage.clear();
-  $("#historyDiv").addClass("hide");
+  savedArtEl.addClass("hide");
 });
