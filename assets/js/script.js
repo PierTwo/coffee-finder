@@ -74,6 +74,9 @@ function chicagoArt() {
     .then(function (data) {
       console.log(data.data);
       chicagoArtResults(data.data);
+    })
+    .catch(function() {
+      alert("invalid input, please try again");
     });
 
   function chicagoArtResults(results) {
