@@ -72,7 +72,7 @@ var metMuseum = function (searchValue) {
 // Function for the Chicago Art Institute. Return data of artwork and appends it to the carousel
 function chicagoArt(searchValue) {
   fetch(
-    `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}&limit=15&fields=id,title,image_id,artist_title,thumbnail,date_display`
+    `https://api.artic.edu/api/v1/artworks/search?q=${searchValue}&limit=15&fields=id,title,image_id,artist_title,thumbnail,date_display&is_public_domain=true`
   )
     .then(function (response) {
       return response.json();

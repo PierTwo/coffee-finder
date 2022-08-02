@@ -34,6 +34,7 @@ h1 {
 
 .searchContainer {
     margin: 5px;
+    padding-bottom: 30px;
 }
 
 .carousel-slider {
@@ -64,4 +65,8 @@ h1 {
 
 #historyDiv {
     margin: 0;
+}
+
+.footerLinks {
+    text-decoration: underline;
 }
