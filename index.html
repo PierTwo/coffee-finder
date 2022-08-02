@@ -31,17 +31,18 @@
       <form class="sm-border-radius col s12 m4 l3 grey darken-3">
         <h3 class="blue-grey lighten-3 center">Search a Museum</h3>
         <div class="input-field">
-          <input
+          <input 
             placeholder="Type what you are searching for here"
             name="search-input"
             id="search_museum"
             type="text"
             class="validate white-text"
             autocomplete="off"
+            required
           />
           <label for="search_museum">Search below</label>
-          <select class="browser-default" id="museum-select">
-            <option value="" disabled selected>Choose your museum</option>
+          <select class="browser-default" id="museum-select" required>
+            <option value="" selected>Choose your museum</option>
             <option value="1">The Metropolitan Museum of Art</option>
             <option value="2">The Art Institute of Chicago</option>
           </select>
@@ -49,7 +50,7 @@
             class="btn waves-effect waves-light s12 m6"
             type="submit"
             id="search-items"
-            disabled
+            
           >
             Search
           </button>
@@ -64,15 +65,7 @@
       <div class="center col s12 m8 l8">
         <h3 class="center">Saved Art Searches:</h3>
         <div id="saved-art-searches">
-          <button class="btn waves-effect waves-light s12 m6">
-            Placeholder button
-          </button>
-          <button class="btn waves-effect waves-light s12 m6">
-            Placeholder button
-          </button>
-          <button class="btn waves-effect waves-light s12 m6">
-            Placeholder button
-          </button>
+          
         </div>
       </div>
     </div>

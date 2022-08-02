@@ -112,9 +112,12 @@ function clearSlider() {
 $("select").change(function (event) {
   event.preventDefault();
 
+  // Prevents from calling API if search input is blank
+  if (searchInput.val() !== ""){
   selectedValue = event.target.value;
 
   $("#search-items").removeAttr("disabled");
+  }
 });
 
 // Click event handler for searching artwork
@@ -130,8 +133,12 @@ $("#search-items").click(function (event) {
       chicagoArt();
       break;
   }
-  saveImageSearch();
-  savedArtSearches();
+ // Prevents from calling API if search input is blank
+  if (searchInput.val() !== ""){
+    saveImageSearch();
+    savedArtSearches();
+  } 
+  
 });
 
 // Makes the prev and next buttons change carousel slide
@@ -151,15 +158,18 @@ function prevNext() {
   });
 }
 
+// Function for setting local storage from user Input
 function saveImageSearch() {
   let userInput = searchInput.val();
   saveTheImageSearch.push(userInput);
   localStorage.setItem("savedImages", JSON.stringify(saveTheImageSearch));
 }
 
+// Function that will display all search history buttons
 function savedArtSearches() {
   $("#saved-art-searches").html("");
 
+  // Loops through the save the image search local storage and then appends them to display on the page
   for (let i = 0; i < saveTheImageSearch.length; i++) {
     var saveSearchBtn = $("<button></button>").text(saveTheImageSearch[i]);
     saveSearchBtn.addClass("btn waves-effect waves-light s12 m6");
@@ -182,4 +192,5 @@ function savedArtSearches() {
   }
 }
 
+// Calls saved art searches functions
 savedArtSearches();
