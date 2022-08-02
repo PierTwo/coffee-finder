@@ -22,9 +22,6 @@ var metMuseum = function () {
     .then(function (data) {
       returnObjects(data.objectIDs);
     })
-    .catch(function() {
-      alert("invalid input, please try again");
-    });
 
   function returnObjects(objectIDs) {
     for (let i = 0; i < 20; i++) {
@@ -75,10 +72,7 @@ function chicagoArt() {
       console.log(data.data);
       chicagoArtResults(data.data);
     })
-    .catch(function() {
-      alert("invalid input, please try again");
-    });
-
+    
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
       if (results[i].image_id) {
