@@ -7,6 +7,22 @@ let saveTheImageSearch = JSON.parse(
   localStorage.getItem("savedImages") || "[]"
 );
 
+// Global variable to grab modal ID element
+var modal = document.getElementById("modal");
+
+// Function to show modal on .catch function
+function showModal(){
+  modal.style.display = "block";
+}
+
+// Function to listen for click if close button is clicked
+function closeModal() {
+  var closeModal = document.getElementById("close-modal");
+  closeModal.addEventListener("click", function(){
+    modal.style.display = "none";
+  });
+}
+
 // Creates global variable to be used when assigning which museum the user chose
 var selectedValue;
 
@@ -22,6 +38,11 @@ var metMuseum = function () {
     .then(function (data) {
       returnObjects(data.objectIDs);
     })
+    .catch(function() {
+      // Calls Modal function
+      showModal();
+      closeModal();
+    });
 
   function returnObjects(objectIDs) {
     for (let i = 0; i < 20; i++) {
@@ -72,7 +93,12 @@ function chicagoArt() {
       console.log(data.data);
       chicagoArtResults(data.data);
     })
-    
+    .catch(function() {
+         // Calls Modal function
+      showModal();
+      closeModal();
+    });
+
   function chicagoArtResults(results) {
     for (let i = 0; i < results.length; i++) {
       if (results[i].image_id) {
@@ -187,6 +213,7 @@ function savedArtSearches() {
         clearSlider();
         $("#search-items").removeAttr("disabled");
         metMuseum();
+        chicagoArt();
       }
     });
   }
