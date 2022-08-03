@@ -3,6 +3,10 @@
     padding: 0 auto;
 }
 
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 button {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -32,8 +36,9 @@ h1 {
     font-variant: small-caps;
 }
 
-.pageContainer {
+.searchContainer {
     margin: 5px;
+    padding-bottom: 30px;
 }
 
 .carousel-slider {
@@ -62,9 +67,15 @@ h1 {
     color: white;
 }
 
+#historyDiv {
+    margin: 0;
+}
+
+.footerLinks {
+    text-decoration: underline;
+}
+
 /* Styling for Modal pop up */
-
-
 #modal {
     font-size: larger;
     display: none;
@@ -89,6 +100,7 @@ h1 {
 #close-modal {
     float: right;
 }
+
 #close-modal:hover {
     cursor: pointer;
 }
