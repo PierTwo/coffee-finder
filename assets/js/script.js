@@ -122,7 +122,6 @@ function chicagoArt(searchValue) {
       closeModal();
     });
 
-
   // Displays the results of the search
   function chicagoArtResults(results) {
     // For every result from the search...
