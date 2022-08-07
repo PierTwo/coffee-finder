@@ -5,29 +5,13 @@ var prevBtn = $("#prev");
 var searchInput = $("#search_museum");
 var savedArtEl = $("#saved-art-searches");
 
-
 // Global variable to grab modal ID element
 var modal = $("#modal");
-
-// Function to show modal on .catch function
-function showModal(){
-  modal.css("display", "block");
-}
-
-// Function to listen for click if close button is clicked
-function closeModal() {
-  var closeModal = $("#close-modal");
-  closeModal.click(function(){
-    modal.css("display", "none");
-  });
-}
-
-
 
 // Creates global variable to be used when assigning which museum the user chose
 var selectedMuseumVal;
 
-// When the document loads retrieve every localStorage and append a button with it to the page
+// When the document loads retrieve every item from localStorage and append a button with it to the page
 $(document).ready(function () {
   for (let i = 0; i < localStorage.length; i++) {
     savedSearch = JSON.parse(localStorage.getItem(i));
@@ -36,6 +20,19 @@ $(document).ready(function () {
     savedArtEl.append(saveSearchBtn);
   };
 });
+
+// Function to show modal on .catch function and if no input is typed in the search bar
+function showModal() {
+  modal.css("display", "block");
+};
+
+// Function to listen for click if close button is clicked
+function closeModal() {
+  var closeModal = $("#close-modal");
+  closeModal.click(function () {
+    modal.css("display", "none");
+  });
+};
 
 // Met museum API. Makes a url based on search input and recieves data.
 // Makes two fetches beacuse the first fetch returns an array of object ids. The second fetch returns the artwork data. Takes the image and puts it in the carousel.
@@ -51,7 +48,7 @@ var metMuseum = function (searchValue) {
       // Call returnObjects with the objectIDs from the API data
       returnObjects(data.objectIDs);
     })
-  .catch(function() {
+    .catch(function () {
       // Calls Modal function
       showModal();
       closeModal();
@@ -119,7 +116,7 @@ function chicagoArt(searchValue) {
       chicagoArtResults(data.data);
 
     })
-    .catch(function() {
+    .catch(function () {
       // Calls Modal function
       showModal();
       closeModal();
@@ -193,7 +190,7 @@ $("#search-items").click(function (event) {
   clearSlider();
 
   // Prevents from calling API functions and savedArtSearches function if search input is blank
-  if (searchInput.val() !== "") {
+  if (searchInput.val()) {
     selectedValue = event.target.value;
     // switch statement to call the museum functions depending on the selected museum the user chose
     switch (selectedMuseumVal) {
@@ -208,6 +205,9 @@ $("#search-items").click(function (event) {
     };
     // Calls savedArtSearches
     saveArtSearches();
+  } else {
+    showModal();
+    closeModal();
   };
 });
 
@@ -238,21 +238,21 @@ function prevNext() {
 
 // Saves the art seaches and creates a button to display it
 function saveArtSearches() {
-  // Creates a variable for searchName to be given value later
+  // Creates a variable for searchName to be given the value of the museum searched
   var searchName;
   // Creates a variable with an empty array
   var savedArtArr = [];
 
   // If statement to set searchName to the search that was inputted and the museum name depending on the museum chosen
   if (selectedMuseumVal == 1) {
-    searchName = `${searchInput.val()} (Metropolitan Museum of Art)`
+    searchName = `${searchInput.val()} (Metropolitan Museum of Art)`;
   } else if (selectedMuseumVal == 2) {
-    searchName = `${searchInput.val()} (Art Institute of Chicago)`
+    searchName = `${searchInput.val()} (Art Institute of Chicago)`;
   };
   // Creates a variable of HTML with a data attribute of the selected museum's value and the text content to searchName
   var saveSearchBtn = $(`<button class="btn waves-effect waves-light s12 m6 savedSearch" data-museum="${selectedMuseumVal}">${searchName}</button>`);
 
-  // Pushes this search to the array of savedArtArr
+  // Pushes the last search to savedArtArr
   $(".savedSearch").each(function () {
     savedArtArr.push($(this).text());
   });
